@@ -37,9 +37,7 @@ app.get('/:id',(req,res) => {
                 res.status(400).json({msg: "The user has no permission to access this page"});
               }
               else{
-                //getting he features for the specified page for specified user
-                const query3 = "select role_feature.feature from role_feature inner join user_role on role_feature.roleType = user_role.roleType inner join user_per on user_per.per = user_role.per where user_per.user_id = "  + mysql.escape(userId) + " and user_role.per = " + mysql.escape(req.params.id)
-                 + " order by role_feature.feature" ; 
+                const query3 = "select role_feature.feature from role_feature inner join user_role on role_feature.roleType = user_role.roleType  inner join user_per on user_per.per = user_role.per where user_per.user_id = "  + mysql.escape(userId) + "user_role.per =" + mysql.escape(req.params.id) + "and user_role.user_id = user_per.user_id order by role_feature.feature" ; 
                 connection.query(query3, (err, result) => {
                      if(err) throw err;
                      let result_1 = result.map(a => a.feature);
@@ -56,7 +54,6 @@ app.listen(5000, () => {
 
 
 /** 
-if page id is not accessed
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
   'rolemodel',
