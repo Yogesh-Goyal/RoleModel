@@ -37,6 +37,7 @@ app.get('/:id',(req,res) => {
                 res.status(400).json({msg: "The user has no permission to access this page"});
               }
               else{
+                //getting the feature from the database for the corresponding role in corresponing page
                 const query3 = "select role_feature.feature from role_feature inner join user_role on role_feature.roleType = user_role.roleType  inner join user_per on user_per.per = user_role.per where user_per.user_id = "  + mysql.escape(userId) + " and user_role.per =" + mysql.escape(req.params.id) + "and user_role.user_id = user_per.user_id order by role_feature.feature" ; 
                 connection.query(query3, (err, result) => {
                      if(err) throw err;
