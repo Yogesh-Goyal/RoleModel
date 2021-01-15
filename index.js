@@ -53,7 +53,7 @@ app.listen(5000, () => {
     console.log('Server is running at port 5000');
 });
 
-
+//if the permission for every specific page  is not defined
 /** 
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
